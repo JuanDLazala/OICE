@@ -1,0 +1,9 @@
+# Design files (no necesarios en el repo)
+DESIGN-HANDOFF.md
+DESIGN-MANIFEST.json
+mqs5cebd-OpenDesign_Prompt_Dashboard_OICE.md
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
