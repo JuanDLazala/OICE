@@ -95,7 +95,15 @@ footer p{font-family:var(--font-m);font-size:11px;color:rgba(255,255,255,.3)}foo
   .suggestions{gap:6px}
   .sug-btn{font-size:12px;padding:7px 11px}
 }
-</style>
+
+    .chat-section { margin: 10px 0 4px; font-size: 0.95em; }
+    .chat-hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 10px 0; }
+    .chat-ul { margin: 4px 0 4px 16px; padding: 0; list-style: disc; }
+    .chat-ul.chat-ol { list-style: none; margin-left: 0; }
+    .chat-ul li { margin: 3px 0; line-height: 1.5; }
+    .list-num { font-weight: 700; color: var(--gold, #c9a84c); min-width: 18px; display: inline-block; }
+
+    </style>
 </head>
 <body>
 
@@ -205,15 +213,76 @@ function esc(s) {
 }
 
 function formatText(raw) {
-  var s = String(raw)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g,'<em>$1</em>');
-  s = s.split('\n\n').join('<br><br>');
-  s = s.split('\n').join('<br>');
-  return s;
+  // Process line by line for better rendering
+  var lines = String(raw).split('\n');
+  var out = [];
+  var inList = false;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i]
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
+
+    // Strip markdown headings ## ### — convert to bold section title
+    var headingMatch = line.match(/^#{1,3}\s*(.+)/);
+    if (headingMatch) {
+      if (inList) { out.push('</ul>'); inList = false; }
+      out.push('<p class="chat-section"><strong>' + headingMatch[1].replace(/\*\*/g,'') + '</strong></p>');
+      continue;
+    }
+
+    // Horizontal rule
+    if (/^[-*]{3,}$/.test(line.trim())) {
+      if (inList) { out.push('</ul>'); inList = false; }
+      out.push('<hr class="chat-hr">');
+      continue;
+    }
+
+    // Bullet list item: - text or * text
+    var bulletMatch = line.match(/^[-*]\s+(.+)/);
+    if (bulletMatch) {
+      if (!inList) { out.push('<ul class="chat-ul">'); inList = true; }
+      var item = bulletMatch[1]
+        .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g,'<em>$1</em>');
+      out.push('<li>' + item + '</li>');
+      continue;
+    }
+
+    // Numbered list: 1. text
+    var numMatch = line.match(/^(\d+)\.\s+(.+)/);
+    if (numMatch) {
+      if (!inList) { out.push('<ul class="chat-ul chat-ol">'); inList = true; }
+      var item2 = numMatch[2]
+        .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g,'<em>$1</em>');
+      out.push('<li><span class="list-num">' + numMatch[1] + '.</span> ' + item2 + '</li>');
+      continue;
+    }
+
+    // Close list if open
+    if (inList && line.trim() === '') {
+      out.push('</ul>'); inList = false;
+    } else if (inList) {
+      out.push('</ul>'); inList = false;
+    }
+
+    // Blank line = paragraph break
+    if (line.trim() === '') {
+      out.push('<br>');
+      continue;
+    }
+
+    // Normal line — apply inline formatting
+    var normal = line
+      .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g,'<em>$1</em>');
+    out.push('<span>' + normal + '</span><br>');
+  }
+
+  if (inList) out.push('</ul>');
+  return out.join('');
 }
 
 function scrollBottom() {

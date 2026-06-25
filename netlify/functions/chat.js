@@ -21,7 +21,14 @@ PROGRAMAS CLAVE:
 - Voto exterior 2026: inscripción en consulado, 4 curules disponibles. registraduria.gov.co
 - Colombia Nos Une (portal integral): colombianosune.com
 
-INSTRUCCIONES: Responde en español, tono cálido, directo y específico. Incluye siempre el portal oficial. Usa listas para trámites con pasos. No inventes teléfonos ni nombres de funcionarios.`;
+FORMATO DE RESPUESTA:
+- Escribe en español con tono cálido, cercano y directo como un orientador humano
+- NO uses ## ni ### como encabezados — usa texto en negrita con ** para los títulos de sección
+- Para listas usa viñetas con - o números con 1.
+- Separa secciones con una línea en blanco, no con ---
+- Incluye siempre el portal oficial al final de cada programa
+- No inventes teléfonos ni nombres de funcionarios
+- Respuestas concisas: máximo 300 palabras salvo que pregunten algo muy complejo`;
 
 exports.handler = async (event) => {
   const headers = {
