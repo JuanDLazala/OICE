@@ -302,12 +302,13 @@ async function sendMessage() {
       body: JSON.stringify({ message: text, history }),
     });
 
-    const data = await res.json();
+    let data;
+    try { data = await res.json(); } catch(je) { data = { error: 'Respuesta inválida HTTP ' + res.status }; }
     removeTyping();
 
     if (!res.ok || data.error) {
-      addMessage('bot', data.error || 'Ocurrió un error. Intenta de nuevo.');
-      questionsLeft++; // refund on error
+      addMessage('bot', '⚠️ ' + (data.error || 'Error ' + res.status + '. Intenta de nuevo.'));
+      questionsLeft++;
       updateCounter();
     } else {
       addMessage('bot', data.reply);
@@ -319,7 +320,7 @@ async function sendMessage() {
     }
   } catch (err) {
     removeTyping();
-    addMessage('bot', 'No pude conectarme al servidor. Revisa tu conexión y vuelve a intentarlo.');
+    addMessage('bot', '⚠️ Sin conexión con el servidor. Error: ' + err.message + '. Verifica tu conexión.');
     questionsLeft++;
     updateCounter();
   }
