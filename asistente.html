@@ -205,14 +205,14 @@ function esc(s) {
 }
 
 function formatText(raw) {
-  var s = esc(raw);
-  s = s.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-  s = s.replace(/\*(.*?)\*/g,'<em>$1</em>');
-  s = s.replace(/
-
-/g,'<br><br>');
-  s = s.replace(/
-/g,'<br>');
+  var s = String(raw)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>');
+  s = s.split('\n\n').join('<br><br>');
+  s = s.split('\n').join('<br>');
   return s;
 }
 
