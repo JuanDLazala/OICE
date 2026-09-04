@@ -10,3 +10,5 @@ desktop.ini
 
 # Copias de seguridad de la auditoría
 *.bak_preauditoria
+*.bak_prebrecha
+Fotos/

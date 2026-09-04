@@ -18,7 +18,7 @@ PROGRAMAS CLAVE:
 - Migración Colombia: visas, salvoconductos, permisos. migracioncolombia.gov.co
 - Homologación títulos: MEN, 3-6 meses. mineducacion.gov.co
 - Repatriación humanitaria: gestión directa con el consulado local
-- Voto exterior: inscripción en consulado. La circunscripción internacional elige 2 curules a la Cámara de Representantes. registraduria.gov.co
+- Voto exterior: inscripción en consulado. La circunscripción internacional elige 1 curul a la Cámara de Representantes (solo en 2014 eligió 2; la segunda se eliminó en 2016). registraduria.gov.co
 - Colombia Nos Une (portal integral): colombianosune.com
 
 FORMATO DE RESPUESTA:
