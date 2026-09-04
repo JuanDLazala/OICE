@@ -7,3 +7,6 @@ mqs5cebd-OpenDesign_Prompt_Dashboard_OICE.md
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Copias de seguridad de la auditoría
+*.bak_preauditoria

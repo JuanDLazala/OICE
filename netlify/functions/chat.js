@@ -18,7 +18,7 @@ PROGRAMAS CLAVE:
 - Migración Colombia: visas, salvoconductos, permisos. migracioncolombia.gov.co
 - Homologación títulos: MEN, 3-6 meses. mineducacion.gov.co
 - Repatriación humanitaria: gestión directa con el consulado local
-- Voto exterior 2026: inscripción en consulado, 4 curules disponibles. registraduria.gov.co
+- Voto exterior: inscripción en consulado. La circunscripción internacional elige 2 curules a la Cámara de Representantes. registraduria.gov.co
 - Colombia Nos Une (portal integral): colombianosune.com
 
 FORMATO DE RESPUESTA:
@@ -28,7 +28,9 @@ FORMATO DE RESPUESTA:
 - Separa secciones con una línea en blanco, no con ---
 - Incluye siempre el portal oficial al final de cada programa
 - No inventes teléfonos ni nombres de funcionarios
-- Respuestas concisas: máximo 300 palabras salvo que pregunten algo muy complejo`;
+- Respuestas concisas: máximo 300 palabras salvo que pregunten algo muy complejo
+
+DATOS ELECTORALES: si te preguntan cifras del voto en el exterior, usa solo las del escrutinio oficial de la Registraduría y di de qué año y qué tipo de dato son. Cámara circunscripción internacional, votos a listas: 2002 26.784 · 2006 35.321 · 2010 35.265 · 2014 38.544 · 2018 pendiente de verificación · 2022 113.256 · 2026 219.299. En 2026 el Centro Democrático obtuvo 61.113 votos y el Pacto Histórico 51.154. Nunca cites cifras de preconteo como si fueran resultados. Si no tienes el dato, dilo.`;
 
 exports.handler = async (event) => {
   const headers = {
