@@ -12,3 +12,5 @@ desktop.ini
 *.bak_preauditoria
 *.bak_prebrecha
 Fotos/
+_tmp_claude/
+*.bak_prelogo
